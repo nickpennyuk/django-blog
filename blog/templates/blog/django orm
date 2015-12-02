@@ -1,0 +1,27 @@
+python manage.py shell to open django shell
+
+from django.contrib.auth.models import User
+from blog.models import Post
+from django.utils import timezone
+me = User.objects.get(username='[user]')
+
+Post.objects.all() //displays all posts
+User.object.all() // Displays all users
+Post.objects.create(author = me, title='Sample Title', text='test')
+Post.objects.filter(author='me')
+Post.objects.filter(title__contains='title')
+Post.objects.get(published_date__lte=timezone.now())
+post = Post.objects.get(title="Sample Title")
+post.publish()
+Post.objects.order_by('created_date')
+Post.objects.order_by('-created_date')
+Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+exit()
+
+	{% for post in posts %}
+	  <div>
+	  	<p>published: {{ post.published_date }}</p>
+	  	<h1><a href="#">{{ post.title }}</a></h1>
+	  	<p>{{ post.text|linebreaks }}</p>
+	  </div>
+	{% endfor %}
