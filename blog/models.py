@@ -6,7 +6,7 @@ class Post(models.Model):
     author = models.ForeignKey('auth.User')
     #define length of post title.
     title = models.CharField(max_length=200)
-    #define lenth of post content.
+    #define length of post content.
     text = models.TextField()
     #setting created date to current time.
     created_date = models.DateTimeField (    
@@ -21,3 +21,5 @@ class Post(models.Model):
     #returns string version of post. 
     def __str__(self):
         return self.title
+
+        #hidden id increment blah
