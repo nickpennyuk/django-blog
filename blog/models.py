@@ -23,3 +23,7 @@ class Post(models.Model):
         return self.title
 
         #hidden id increment blah
+"""
+class Login(models.Model):
+    username = 
+"""

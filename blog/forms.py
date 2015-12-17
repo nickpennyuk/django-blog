@@ -2,7 +2,12 @@ from django import forms
 from .models import Post
 
 class PostForm(forms.ModelForm):
-	
 	class Meta:
 		model = Post
-		fields = ('title', 'text',)
+		fields = ('author', 'title', 'text',)
+"""
+class Loginfom(forms.ModelForm):
+	class Meta:
+		model = Login
+		fields = ('Username', 'Password',)
+"""
