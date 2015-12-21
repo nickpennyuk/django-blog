@@ -57,6 +57,17 @@ def artist_new(request):
         form = ArtistForm()
     return render(request, 'blog/artist_edit.html', {'form': form})
 
+def artist_edit(request, pk):
+    artist = get_object_or_404(Artist, pk=pk)
+    if request.method == "POST":
+        form = ArtistForm(request.POST, instance=artist)
+        if form.is_valid():
+            artist = form.save()
+            return redirect('artist_list')
+    else:
+        form = ArtistForm(instance=artist)
+    return render(request, 'blog/artist_edit.html', {'form': form})
+
 
 #client request > include app/urls.py into project/urls.py > 
 #app/urls.py define html files > views.py renders html and sends to client.

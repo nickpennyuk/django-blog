@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^post/(?P<pk>[0-9]+)/edit/$', views.post_edit, name='post_edit'),
     url(r'^artists/$', views.artist_list, name='artist_list'),
     url(r'^artists/new/$', views.artist_new, name='artist_new'),
+    url(r'^artists/(?P<pk>[0-9]+)/edit/$', views.artist_edit, name='artist_edit'),
 ]
