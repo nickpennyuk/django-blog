@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from datetime import date
 
 class Post(models.Model):
     #link to another table eg. users.
@@ -14,7 +15,7 @@ class Post(models.Model):
     #allows published date to be set to null.
     published_date = models.DateTimeField (
         blank=True, null=True)
-    #defines a publish method (function in class is called a method.)
+    #defiabout:addonsnes a publish method (function in class is called a method.)
     def publish(self):
       self.published_date = timezone.now()
       self.save()
@@ -23,7 +24,17 @@ class Post(models.Model):
         return self.title
 
         #hidden id increment blah
-"""
-class Login(models.Model):
-    username = 
-"""
+
+class Artist(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+class Album(models.Model):
+    artist = models.ForeignKey(Artist)
+    title = models.CharField(max_length=50)
+    year = models.DateField(auto_now=False)
+
+    def __str__(self):
+        return self.title

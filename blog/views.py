@@ -1,17 +1,16 @@
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Post
+from .models import Artist
 from .forms import PostForm
+from .forms import ArtistForm
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
-"""
-def log_in(request):
-    return render(request 'blog/login.html', {})
-"""
+
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
@@ -42,6 +41,22 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
+
+def artist_list(request):
+    artists = Artist.objects.all()
+    print(artists)
+    return render(request, 'blog/artist_list.html', {'artists' : artists})
+
+def artist_new(request):
+    if request.method == "POST":
+        form = ArtistForm(request.POST)
+        if form.is_valid():
+            artist = form.save()
+            return redirect('artist_list')
+    else:
+        form = ArtistForm()
+    return render(request, 'blog/artist_edit.html', {'form': form})
+
 
 #client request > include app/urls.py into project/urls.py > 
 #app/urls.py define html files > views.py renders html and sends to client.

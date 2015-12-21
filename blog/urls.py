@@ -4,8 +4,9 @@ from .forms import PostForm
 
 urlpatterns = [
     url(r'^$', views.post_list, name='post_list'),
-    #url(r'^login/$', views.log_in, name='log_in'),
     url(r'^post/(?P<pk>[0-9]+)/$', views.post_detail, name='post_detail'),
     url(r'^post/new/$', views.post_new, name='post_new'),
     url(r'^post/(?P<pk>[0-9]+)/edit/$', views.post_edit, name='post_edit'),
+    url(r'^artists/$', views.artist_list, name='artist_list'),
+    url(r'^artists/new/$', views.artist_new, name='artist_new'),
 ]

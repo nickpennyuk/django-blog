@@ -1,13 +1,13 @@
 from django import forms
 from .models import Post
+from .models import Artist
 
 class PostForm(forms.ModelForm):
 	class Meta:
 		model = Post
 		fields = ('author', 'title', 'text',)
-"""
-class Loginfom(forms.ModelForm):
+
+class ArtistForm(forms.ModelForm):
 	class Meta:
-		model = Login
-		fields = ('Username', 'Password',)
-"""
+		model = Artist
+		fields = ('name',)
