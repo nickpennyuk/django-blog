@@ -84,8 +84,8 @@ def artist_edit(request, pk):
     """
 
 def album_list(request):
-    album = Album.objects.all()
-    return render(request, 'blog/album_list.html', {'album' : album})
+    albums = Album.objects.all()
+    return render(request, 'blog/album_list.html', {'albums' : albums})
 
 def album_new(request):
     if request.method == "POST":

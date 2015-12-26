@@ -3,7 +3,7 @@
 {% block content %}
 	{% for album in albums %}
 	    <div class="post">
-	        <h1><a href="{% url 'album_edit' artists.pk %}">{{ album.name }}</a></h1>
+	        <h1><a href="{% url 'album_edit' %}">{{ album.name }}</a></h1>
 	    </div>
 	{% endfor %}
 {% endblock content %}
