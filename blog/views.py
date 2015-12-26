@@ -1,11 +1,13 @@
-from django.shortcuts import render
 from django.utils import timezone
-from .models import Post
-from .models import Artist
-from .forms import PostForm
-from .forms import ArtistForm
-from django.shortcuts import render, get_object_or_404
-from django.shortcuts import redirect
+from .models import Post, Artist, Album
+from .forms import PostForm, ArtistForm, AlbumForm
+from django.shortcuts import render, get_object_or_404, redirect
+
+"""
+
+POSTS
+
+"""
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -31,7 +33,7 @@ def post_new(request):
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
-        form = PostForm(request.POST, instance=post) # request.POST = formdata info, 
+        form = PostForm(request.POST, instance=post) # request.POST = formdata info,
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
@@ -42,9 +44,15 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
 
+
+    """
+
+    Artists
+
+    """
+
 def artist_list(request):
     artists = Artist.objects.all()
-    print(artists)
     return render(request, 'blog/artist_list.html', {'artists' : artists})
 
 def artist_new(request):
@@ -69,5 +77,36 @@ def artist_edit(request, pk):
     return render(request, 'blog/artist_edit.html', {'form': form})
 
 
-#client request > include app/urls.py into project/urls.py > 
+    """
+
+    Albums
+
+    """
+
+def album_list(request):
+    album = Album.objects.all()
+    return render(request, 'blog/album_list.html', {'album' : album})
+
+def album_new(request):
+    if request.method == "POST":
+        form = AlbumForm(request.POST)
+        if form.is_valid():
+            album = form.save()
+            return redirect('album_list')
+    else:
+        form = AlbumForm()
+    return render(request, 'blog/album_edit.html', {'form': form})
+
+def album_edit(request, pk):
+    album = get_object_or_404(Album, pk=pk)
+    if request.method == "POST":
+        form = AlbumForm(request.POST, instance=album)
+        if form.is_valid():
+            album = form.save()
+            return redirect('album_list')
+    else:
+        form = AlbumForm(instance=album)
+    return render(request, 'blog/album_edit.html', {'form': form})
+
+#client request > include app/urls.py into project/urls.py >
 #app/urls.py define html files > views.py renders html and sends to client.
