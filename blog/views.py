@@ -3,14 +3,9 @@ from .models import Post, Artist, Album
 from .forms import PostForm, ArtistForm, AlbumForm
 from django.shortcuts import render, get_object_or_404, redirect
 
-"""
-
-POSTS
-
-"""
-
 def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by(
+        'published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 def post_detail(request, pk):
@@ -33,7 +28,7 @@ def post_new(request):
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
-        form = PostForm(request.POST, instance=post) # request.POST = formdata info,
+        form = PostForm(request.POST, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
@@ -43,13 +38,6 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
-
-
-    """
-
-    Artists
-
-    """
 
 def artist_list(request):
     artists = Artist.objects.all()
@@ -76,13 +64,6 @@ def artist_edit(request, pk):
         form = ArtistForm(instance=artist)
     return render(request, 'blog/artist_edit.html', {'form': form})
 
-
-    """
-
-    Albums
-
-    """
-
 def album_list(request):
     albums = Album.objects.all()
     return render(request, 'blog/album_list.html', {'albums' : albums})
@@ -107,6 +88,3 @@ def album_edit(request, pk):
     else:
         form = AlbumForm(instance=album)
     return render(request, 'blog/album_edit.html', {'form': form})
-
-#client request > include app/urls.py into project/urls.py >
-#app/urls.py define html files > views.py renders html and sends to client.
