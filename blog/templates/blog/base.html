@@ -5,22 +5,29 @@
         <title>Django Girls blog</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    		<link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet">
+    		<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,700,500,900'>
     		<link rel="stylesheet" href="{% static 'css/blog.css' %}">
     </head>
     <body>
 	    <div class="page-header">
-        <a href="{% url 'artist_list' %}" class="top-menu"><span class="glyphicon glyphicon-user"></span></a>
-	    	<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-	        <h1><a href="/">Django Girls Blog</a></h1>
+		    <div class="container">
+		        <a href="{% url 'artist_list' %}" class="top-menu"><span class="glyphicon glyphicon-user"></span><p>Artists</p></a>
+			    <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span><p>Add Post</p></a>
+			    <h1><a href="/">Nick's Django Playground</a></h1>
+		    </div>
 	    </div>
 	    <div class="content container">
 	        <div class="row">
-	            <div class="col-md-8">
+	            <div class="col-md-12">
 	            {% block content %}
 	            {% endblock %}
 	            </div>
 	        </div>
+	    </div>
+	    <div class="page-footer">
+		    <div class="container">
+		    	<p class="nav-text">&copy; Copyright Nick's Django Playground 2015-2016</p>
+	    	</div>
 	    </div>
     </body>
 </html>
