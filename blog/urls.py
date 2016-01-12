@@ -15,7 +15,6 @@ urlpatterns = [
     url(r'^artist/new/$', views.artist_new, name='artist_new'), # add new artist
     url(r'^artist/(?P<pk>[0-9]+)/edit/$', views.artist_edit, name='artist_edit'), # edit artists
 #  Album
-    url(r'^album/(?P<pk>[0-9]+)/$', views.album_detail, name='album_detail'),
     url(r'^artist/(?P<pk>[0-9]+)/album/$', views.album_list, name='album_list'),
     url(r'^artist/album/new/$', views.album_new, name='album_new'),
 ]

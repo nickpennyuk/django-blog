@@ -64,8 +64,9 @@ def artist_edit(request, pk):
         form = ArtistForm(instance=artist)
     return render(request, 'blog/artist_edit.html', {'form': form})
 
-def album_list(request):
-    albums = Album.objects.all()
+def album_list(request, pk):
+    artist = get_object_or_404(Artist, pk=pk)
+    albums = Album.objects.filter(artist = artist) ## change filter
     return render(request, 'blog/album_list.html', {'albums' : albums})
 
 def album_new(request):
