@@ -74,7 +74,7 @@ def album_new(request):
         form = AlbumForm(request.POST)
         if form.is_valid():
             album = form.save()
-            return redirect('album_list')
+            return redirect('album_list', album.artist.pk)
     else:
         form = AlbumForm()
     return render(request, 'blog/album_edit.html', {'form': form})
