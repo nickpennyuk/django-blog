@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+	<a class="btn btn-default pull-right" href="{% url 'post_new' %}">New Post</a>
 	{% for post in posts %}
 	    <div class="post">
 	        <div class="date">

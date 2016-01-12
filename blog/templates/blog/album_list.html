@@ -1,6 +1,8 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+	<a class="btn btn-default pull-right" href="{% url 'artist_edit' %}">Edit Artist</a>
+	<a class="btn btn-default pull-right" href="{% url 'album_new' %}">New Album</a>
 	{% for album in albums %}
 	    <div class="post">
 	        <h1>{{ album.title }}</h1>
