@@ -1,0 +1,14 @@
+Install Python.
+  Windows users download installer from www.python.org/downloads.
+  Linux users already have it installed.
+
+Install your favourite text editor.
+  Sublime, Atom, gedit, Np++.
+
+What is django?
+  Django is a free and open source web application framework, written in Python.
+  A web framework is a set of components that helps you to develop websites
+  faster and easier. When you're building a website, you always need a similar
+  set of components: a way to handle user authentication (signing up, signing
+  in, signing out), a management panel for your website, forms, a way to upload
+  files, etc. You can do all this with django.
