@@ -2,8 +2,8 @@
 
 {% block content %}
 	<a class="btn btn-default pull-right" href="{% url 'artist_new' %}">New Artist</a>
-	<a class="btn btn-default pull-right" href="{% url 'artist_edit' pk=artist.pk %}">Edit Artist</a>
 	{% for artist in artists %}
+		<a class="btn btn-default pull-right" href="{% url 'artist_edit' artist.pk %}">Edit Artist</a>
 	    <div class="post">
 	        <h1><a href="{% url 'album_list' artist.pk %}">{{ artist.name }}</a></h1>
 	    </div>
