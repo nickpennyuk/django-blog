@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 from . import views
-from .views import PostListView, ArtistListView
+from .views import PostListView, ArtistListView, PostDetailView, PostCreateView
 from .forms import PostForm
 
 urlpatterns = [
@@ -8,8 +8,8 @@ urlpatterns = [
 #  Home
     url(r'^$', PostListView.as_view(), name='post_list'), # List of all posts on home page
 #  Blog
-    url(r'^post/(?P<pk>[0-9]+)/$', views.post_detail, name='post_detail'), # The individual clicked post
-    url(r'^post/new/$', views.post_new, name='post_new'), # New post page
+    url(r'^post/(?P<pk>[0-9]+)/$', PostDetailView.as_view(), name='post_detail'), # The individual clicked post
+    url(r'^post/new/$', PostCreateView.as_view() , name='post_new'), # New post page
     url(r'^post/(?P<pk>[0-9]+)/edit/$', views.post_edit, name='post_edit'), # The edit post page after clicking through to individual post
 #  Artist
     url(r'^artist/$', ArtistListView.as_view(), name='artist_list'), # list of artists

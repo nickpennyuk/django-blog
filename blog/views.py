@@ -2,12 +2,11 @@ from django.utils import timezone
 from .models import Post, Artist, Album
 from .forms import PostForm, ArtistForm, AlbumForm
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView
+from django.core.urlresolvers import reverse
+from django.views.generic import ListView, DetailView, CreateView
 
 
-class PostListView(ListView):
-
-    template_name = 'blog/post_list.html'
+class PostListView(ListView): # Automatically gets template file from .lower + .append _html
 
     def get_queryset(self):
         return Post.objects.filter(
@@ -15,11 +14,21 @@ class PostListView(ListView):
         ).order_by('-published_date')
 
 
-def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    return render(request, 'blog/post_detail.html', {'post': post})
+class PostDetailView(DetailView):
+
+    model = Post
 
 
+class PostCreateView(CreateView):
+
+    model = Post
+    form_class = PostForm
+
+    def get_success_url(self):
+        return reverse('post_detail', args=[self.object.pk])
+
+
+"""
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -32,7 +41,7 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
-
+"""
 
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -46,10 +55,11 @@ def post_edit(request, pk):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'blog/post_form.html', {'form': form})
 
 
 class ArtistListView(ListView):
+
     template_name = 'blog/artist_list.html'
     model = Artist
 
