@@ -2,11 +2,17 @@ from django.utils import timezone
 from .models import Post, Artist, Album
 from .forms import PostForm, ArtistForm, AlbumForm
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView
 
-def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by(
-        'published_date')
-    return render(request, 'blog/post_list.html', {'posts': posts})
+class PostListView(ListView):
+    template_name = 'blog/post_list.html'
+    model = Post
+
+
+#def post_list(request):
+ #   posts = Post.objects.filter(published_date__lte=timezone.now()).order_by(
+ #       'published_date')
+ #   return render(request, 'blog/post_list.html', {'posts': posts})
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -39,9 +45,13 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
 
-def artist_list(request):
-    artists = Artist.objects.all()
-    return render(request, 'blog/artist_list.html', {'artists' : artists})
+class ArtistListView(ListView):
+    template_name = 'blog/artist_list.html'
+    model = Artist
+
+#def artist_list(request):
+#    artists = Artist.objects.all()
+#    return render(request, 'blog/artist_list.html', {'artists' : artists})
 
 def artist_new(request):
     if request.method == "POST":

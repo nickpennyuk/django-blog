@@ -2,7 +2,7 @@
 
 {% block content %}
 	<a class="btn btn-default pull-right" href="{% url 'post_new' %}">New Post</a>
-	{% for post in posts %}
+	{% for post in post_list %}
 	    <div class="post">
 	        <div class="date">
 	            {{ post.published_date }}

@@ -2,7 +2,7 @@
 
 {% block content %}
 	<a class="btn btn-default pull-right" href="{% url 'artist_new' %}">New Artist</a>
-	{% for artist in artists %}
+	{% for artist in object_list %}
 	    {% if user.is_authenticated %}
 			<a class="btn btn-default pull-right" href="{% url 'artist_edit' artist.pk %}">Edit Artist</a>
 	    {% endif %}
