@@ -6,8 +6,8 @@ from django.core.urlresolvers import reverse
 from django.views.generic import ListView, DetailView, CreateView
 
 
-class PostListView(ListView): # Automatically gets template file from .lower + .append _html
-
+class PostListView(ListView): 
+    # Automatically gets template file from .lower + .append _html
     def get_queryset(self):
         return Post.objects.filter(
             published_date__lte=timezone.now()
@@ -24,24 +24,15 @@ class PostCreateView(CreateView):
     model = Post
     form_class = PostForm
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.author = self.request.user
+        self.object.published_date = timezone.now()
+        return super().form_valid(form)
+
     def get_success_url(self):
         return reverse('post_detail', args=[self.object.pk])
 
-
-"""
-def post_new(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            return redirect('blog.views.post_detail', pk=post.pk)
-    else:
-        form = PostForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
-"""
 
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
