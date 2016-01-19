@@ -6,13 +6,16 @@ from django.views.generic import ListView
 
 class PostListView(ListView):
     template_name = 'blog/post_list.html'
-    model = Post
-
+    #model = Post
+    def get_queryset(self):
+        return Post.objects.filter(
+            published_date__lte=timezone.now()
+        ).order_by('-published_date')
 
 #def post_list(request):
- #   posts = Post.objects.filter(published_date__lte=timezone.now()).order_by(
- #       'published_date')
- #   return render(request, 'blog/post_list.html', {'posts': posts})
+#    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by(
+#       'published_date')
+#   return render(request, 'blog/post_list.html', {'posts': posts})
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -76,7 +79,7 @@ def artist_edit(request, pk):
 
 def album_list(request, pk):
     artist = get_object_or_404(Artist, pk=pk)
-    albums = Album.objects.filter(artist = artist) ## change filter
+    albums = Album.objects.filter(artist = artist)
     return render(request, 'blog/album_list.html', {'albums' : albums})
 
 def album_new(request):
