@@ -4,22 +4,21 @@ from .forms import PostForm, ArtistForm, AlbumForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView
 
+
 class PostListView(ListView):
+
     template_name = 'blog/post_list.html'
-    #model = Post
+
     def get_queryset(self):
         return Post.objects.filter(
             published_date__lte=timezone.now()
         ).order_by('-published_date')
 
-#def post_list(request):
-#    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by(
-#       'published_date')
-#   return render(request, 'blog/post_list.html', {'posts': posts})
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
+
 
 def post_new(request):
     if request.method == "POST":
@@ -33,6 +32,7 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
+
 
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -48,13 +48,11 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
 
+
 class ArtistListView(ListView):
     template_name = 'blog/artist_list.html'
     model = Artist
 
-#def artist_list(request):
-#    artists = Artist.objects.all()
-#    return render(request, 'blog/artist_list.html', {'artists' : artists})
 
 def artist_new(request):
     if request.method == "POST":
@@ -65,6 +63,7 @@ def artist_new(request):
     else:
         form = ArtistForm()
     return render(request, 'blog/artist_edit.html', {'form': form})
+
 
 def artist_edit(request, pk):
     artist = get_object_or_404(Artist, pk=pk)
@@ -77,10 +76,12 @@ def artist_edit(request, pk):
         form = ArtistForm(instance=artist)
     return render(request, 'blog/artist_edit.html', {'form': form})
 
+
 def album_list(request, pk):
     artist = get_object_or_404(Artist, pk=pk)
     albums = Album.objects.filter(artist = artist)
     return render(request, 'blog/album_list.html', {'albums' : albums})
+
 
 def album_new(request):
     if request.method == "POST":
@@ -91,6 +92,7 @@ def album_new(request):
     else:
         form = AlbumForm()
     return render(request, 'blog/album_edit.html', {'form': form})
+
 
 def album_edit(request, pk):
     album = get_object_or_404(Album, pk=pk)
