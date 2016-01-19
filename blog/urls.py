@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 from . import views
-from .views import PostListView, ArtistListView, PostDetailView, PostCreateView, ArtistCreateView, AlbumCreateView
+from .views import PostListView, ArtistListView, PostDetailView, PostCreateView, ArtistCreateView, AlbumCreateView, ArtistDetailView
 from .forms import PostForm
 
 urlpatterns = [
@@ -16,6 +16,6 @@ urlpatterns = [
     url(r'^artist/new/$', ArtistCreateView.as_view(), name='artist_new'), # add new artist
     url(r'^artist/(?P<pk>[0-9]+)/edit/$', views.artist_edit, name='artist_edit'), # edit artists
 #  Album
-    url(r'^artist/(?P<pk>[0-9]+)/album/$', views.album_list, name='album_list'),
+    url(r'^artist/(?P<pk>[0-9]+)/album/$', ArtistDetailView.as_view(), name='album_list'),
     url(r'^artist/album/new/$', AlbumCreateView.as_view(), name='album_new'),
 ]

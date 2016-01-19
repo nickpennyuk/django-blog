@@ -76,11 +76,20 @@ def artist_edit(request, pk):
     return render(request, 'blog/artist_edit.html', {'form': form})
 
 
+class ArtistDetailView(DetailView):
+
+    model = Artist
+
+
+"""
+
+artist.album_set.all()
+
 def album_list(request, pk):
     artist = get_object_or_404(Artist, pk=pk)
     albums = Album.objects.filter(artist = artist)
     return render(request, 'blog/album_list.html', {'albums' : albums})
-
+"""
 
 class AlbumCreateView(CreateView):
 
@@ -90,18 +99,6 @@ class AlbumCreateView(CreateView):
     def get_success_url(self):
         return reverse('album_list', args=[self.object.artist.pk])
 
-
-"""
-def album_new(request):
-    if request.method == "POST":
-        form = AlbumForm(request.POST)
-        if form.is_valid():
-            album = form.save()
-            return redirect('album_list', album.artist.pk)
-    else:
-        form = AlbumForm()
-    return render(request, 'blog/album_edit.html', {'form': form})
-"""
 
 def album_edit(request, pk):
     album = get_object_or_404(Album, pk=pk)
