@@ -3,7 +3,7 @@ from .models import Post, Artist, Album
 from .forms import PostForm, ArtistForm, AlbumForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.urlresolvers import reverse
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 
 class PostListView(ListView): 
@@ -34,6 +34,16 @@ class PostCreateView(CreateView):
         return reverse('post_detail', args=[self.object.pk])
 
 
+class PostUpdateView(UpdateView):
+
+    model = Post
+    form_class = PostForm
+
+    def get_success_url(self):
+        return reverse('post_detail', args=[self.object.pk])
+
+
+"""
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -47,7 +57,7 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_form.html', {'form': form})
-
+"""
 
 class ArtistListView(ListView):
 
@@ -64,32 +74,19 @@ class ArtistCreateView(CreateView):
         return reverse('artist_list')
 
 
-def artist_edit(request, pk):
-    artist = get_object_or_404(Artist, pk=pk)
-    if request.method == "POST":
-        form = ArtistForm(request.POST, instance=artist)
-        if form.is_valid():
-            artist = form.save()
-            return redirect('artist_list')
-    else:
-        form = ArtistForm(instance=artist)
-    return render(request, 'blog/artist_edit.html', {'form': form})
+class ArtistUpdateView(UpdateView):
+
+    model = Artist
+    form_class = ArtistForm
+
+    def get_success_url(self):
+        return reverse('artist_list')
 
 
 class ArtistDetailView(DetailView):
 
     model = Artist
 
-
-"""
-
-artist.album_set.all()
-
-def album_list(request, pk):
-    artist = get_object_or_404(Artist, pk=pk)
-    albums = Album.objects.filter(artist = artist)
-    return render(request, 'blog/album_list.html', {'albums' : albums})
-"""
 
 class AlbumCreateView(CreateView):
 
@@ -100,6 +97,17 @@ class AlbumCreateView(CreateView):
         return reverse('album_list', args=[self.object.artist.pk])
 
 
+class AlbumUpdateView(UpdateView):
+
+
+    model = Album
+    form_class = AlbumForm
+
+    def get_success_url(self):
+        return reverse('album_list', args=[self.object.artist.pk])
+
+
+"""
 def album_edit(request, pk):
     album = get_object_or_404(Album, pk=pk)
     if request.method == "POST":
@@ -110,3 +118,4 @@ def album_edit(request, pk):
     else:
         form = AlbumForm(instance=album)
     return render(request, 'blog/album_edit.html', {'form': form})
+"""
