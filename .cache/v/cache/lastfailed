@@ -1,4 +1,1 @@
-{
-  "myvenv/lib/python3.4/site-packages/jsonschema/tests/test_jsonschema_test_suite.py": true,
-  "myvenv/lib/python3.4/site-packages/wheel/test/test_tool.py::test_keygen": true
-}
+{}
