@@ -3,7 +3,7 @@ from .models import Post, Artist, Album
 from .forms import PostForm, ArtistForm, AlbumForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.urlresolvers import reverse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
 class PostListView(ListView): 
@@ -41,7 +41,10 @@ class PostUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('post_detail', args=[self.object.pk])
+"""
+class PostDeleteView(DeleteView):
 
+"""
 
 
 class ArtistListView(ListView):
