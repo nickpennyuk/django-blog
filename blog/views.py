@@ -41,6 +41,8 @@ class PostUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('post_detail', args=[self.object.pk])
+
+
 """
 class PostDeleteView(DeleteView):
 

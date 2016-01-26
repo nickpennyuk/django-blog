@@ -1,12 +1,16 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-	<a class="btn btn-default pull-right" href="{% url 'album_new' %}">New Album</a>
-	<h1>{{ artist.name }}</h1>
+	{% if user.is_authenticated %}
+		<a class="btn btn-default pull-right" href="{% url 'album_new' %}">New Album</a>
+	{% endif %}
+	<h1>{{ artist.name }}'s Albums</h1>
 	{% for album in artist.album_set.all %}
-	<a class="btn btn-default pull-right" href="{% url 'album_edit' album.pk %}">Edit Album</a>
+		{% if user.is_authenticated %}
+			<a class="btn btn-default pull-right" href="{% url 'album_edit' album.pk %}">Edit Album</a>
+		{% endif %}    
 	    <div class="post">
-	        <h1>{{ album.title }}</h1>
+	        <h3>{{ album.title }}</h3>
 	    </div>
 	{% endfor %}
 {% endblock content %}

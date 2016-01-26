@@ -19,4 +19,5 @@ urlpatterns = [
     url(r'^artist/(?P<pk>[0-9]+)/album/$', ArtistDetailView.as_view(), name='album_list'),
     url(r'^artist/album/new/$', AlbumCreateView.as_view(), name='album_new'),
     url(r'^artist/album/(?P<pk>[0-9]+)/edit/$', AlbumUpdateView.as_view(), name='album_edit'),
+    
 ]
