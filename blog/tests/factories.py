@@ -1,4 +1,5 @@
 import factory
+from datetime import date
 from blog.models import Post, Artist, Album
 from django.contrib.auth.models import User
 
@@ -27,3 +28,6 @@ class AlbumFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = Album
+
+    artist = factory.SubFactory(ArtistFactory)
+    year = date.today()
