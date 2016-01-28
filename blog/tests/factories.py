@@ -17,8 +17,6 @@ class PostFactory(factory.django.DjangoModelFactory):
 	author = factory.SubFactory(UserFactory)
 	
 
-"""
-
 class ArtistFactory(factory.django.DjangoModelFactory):
 
 	class Meta:
@@ -29,5 +27,3 @@ class AlbumFactory(factory.django.DjangoModelFactory):
 
 	class Meta:
 		model = Album
-
-"""
