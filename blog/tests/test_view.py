@@ -85,7 +85,6 @@ def test_album_new(client):
     response = client.get(url)
     assert 200 == response.status_code
 
-
 @pytest.mark.django_db
 def test_album_new_post(client):
     artist = ArtistFactory()
@@ -100,7 +99,6 @@ def test_album_new_post(client):
     album = Album.objects.first()
     assert 'Last Resort' == album.title
     assert '11/11/2011' == album.year
-
 
 @pytest.mark.django_db
 def test_album_edit(client):
