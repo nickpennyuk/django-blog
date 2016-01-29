@@ -1,4 +1,5 @@
 import pytest
+from datetime import datetime
 from django.core.urlresolvers import reverse
 from .factories import PostFactory, ArtistFactory, AlbumFactory
 from blog.models import Artist, Post, Album
@@ -90,15 +91,15 @@ def test_album_new_post(client):
     artist = ArtistFactory()
     url = reverse('album_new')
     data = {
-    'artist' : artist.pk,
-    'title' : 'Last Resort',
-    'year' : '11/11/2011'
+        'artist' : artist.pk,
+        'title' : 'Last Resort',
+        'year' : '30/11/2011',
     }
     response = client.post(url, data)
     assert 302 == response.status_code
     album = Album.objects.first()
     assert 'Last Resort' == album.title
-    assert '11/11/2011' == album.year
+    assert datetime(2011, 11, 30).date() == album.year
 
 @pytest.mark.django_db
 def test_album_edit(client):
