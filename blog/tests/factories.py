@@ -31,3 +31,4 @@ class AlbumFactory(factory.django.DjangoModelFactory):
 
     artist = factory.SubFactory(ArtistFactory)
     year = date.today()
+    

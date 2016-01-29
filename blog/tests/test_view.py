@@ -1,7 +1,7 @@
 import pytest
 from django.core.urlresolvers import reverse
 from .factories import PostFactory, ArtistFactory, AlbumFactory
-from blog.models import Artist
+from blog.models import Artist, Post, Album
 
 @pytest.mark.django_db # tells pytest-django to use a temporary database
 def test_post_list(client):
@@ -21,6 +21,21 @@ def test_post_new(client):
     url = reverse('post_new')
     response = client.get(url)
     assert 200 == response.status_code
+
+"""
+@pytest.mark.dajngo_db
+def test_create_post(client):
+    url = reverse('post_new')
+    data = {
+    'title' : 'Post Test Post',
+    'text' : 'Test Post Text',
+    }
+    response = client.post(url, data)
+    assert 302 == response.status_code
+    post = Post.objects.first()
+    assert 'Post Test Post' == post.title
+    assert 'Test Post Text' == post.text
+"""
 
 @pytest.mark.django_db
 def test_post_edit(client):
@@ -69,6 +84,23 @@ def test_album_new(client):
     url = reverse('album_new')
     response = client.get(url)
     assert 200 == response.status_code
+
+
+@pytest.mark.django_db
+def test_album_new_post(client):
+    artist = ArtistFactory()
+    url = reverse('album_new')
+    data = {
+    'artist' : artist.pk,
+    'title' : 'Last Resort',
+    'year' : '11/11/2011'
+    }
+    response = client.post(url, data)
+    assert 302 == response.status_code
+    album = Album.objects.first()
+    assert 'Last Resort' == album.title
+    assert '11/11/2011' == album.year
+
 
 @pytest.mark.django_db
 def test_album_edit(client):
