@@ -4,8 +4,8 @@ from .factories import PostFactory, ArtistFactory, AlbumFactory
 
 @pytest.mark.django_db # tells pytest-django to use a temporary database
 def test_post_list(client):
-	url = reverse('post_list')
-	response = client.get(url)
+	url = reverse('post_list') # Reverse turns url "name" back to url format and assigns it to url variable
+	response = client.get(url) # assigns response to url variable
 	assert 200 == response.status_code
 
 @pytest.mark.django_db
