@@ -1,7 +1,7 @@
 import pytest
 from datetime import datetime
 from django.core.urlresolvers import reverse
-from .factories import PostFactory, ArtistFactory, AlbumFactory
+from .factories import UserFactory, PostFactory, ArtistFactory, AlbumFactory
 from blog.models import Artist, Post, Album
 
 @pytest.mark.django_db # tells pytest-django to use a temporary database
@@ -23,11 +23,12 @@ def test_post_new(client):
     response = client.get(url)
     assert 200 == response.status_code
 
-"""
-@pytest.mark.dajngo_db
+@pytest.mark.django_db
 def test_create_post(client):
+    author = UserFactory()
     url = reverse('post_new')
     data = {
+    'author' : 'Nick',
     'title' : 'Post Test Post',
     'text' : 'Test Post Text',
     }
@@ -36,7 +37,6 @@ def test_create_post(client):
     post = Post.objects.first()
     assert 'Post Test Post' == post.title
     assert 'Test Post Text' == post.text
-"""
 
 @pytest.mark.django_db
 def test_post_edit(client):
