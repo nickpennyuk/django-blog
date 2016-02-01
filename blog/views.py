@@ -94,12 +94,12 @@ class AlbumCreateView(CreateView):
     model = Album
     form_class = AlbumForm
 
-    if form.is_valid():
-            album = form.save(commit=False)
-            artist.name = request.artists
-            artist.save()
-            return redirect('artist_detail', pk=artist.pk)
- 
+    def form_valid(self, form):
+        album = form.save(commit=False)
+        artist.name = request.artists
+        artist.save()
+        return redirect('artist_detail', pk=artist.pk)
+
     def get_success_url(self):
         return reverse('album_list', args=[self.object.artist.pk])
 
