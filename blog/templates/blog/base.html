@@ -3,52 +3,52 @@
 <html>
     <head>
         <title>Django Girls blog</title>
-    		<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,700,500,900'>
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,700,500,900'>
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-    		<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     </head>
     <body>
 
-      <nav class="navbar navbar-inverse navbar-static-top">
+    <nav class="navbar navbar-inverse navbar-static-top">
         <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Django Playground</a>
-          </div>
-          <div class="collapse navbar-collapse" id="navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="{% url 'post_list' %}" class="top-menu">Blog</a></li>
-              <li><a href="{% url 'artist_list' %}" class="top-menu">Artists</a></li>
-            </ul>
-          </div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Django Playground</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'post_list' %}" class="top-menu">Blog</a></li>
+                    <li><a href="{% url 'artist_list' %}" class="top-menu">Artists</a></li>
+                </ul>
+            </div>
         </div>
-      </nav>
+    </nav>
 
-      <div class="page-header">
-		    <div class="container">
-			    <h1><a href="/">Nick's Django Playground</a></h1>
-		    </div>
-	    </div>
+<div class="page-header">
+<div class="container">
+<h1><a href="/">Nick's Django Playground</a></h1>
+</div>
+</div>
 
-	    <div class="content container">
-	        <div class="row">
-	            <div class="col-md-12">
-	            {% block content %}
-	            {% endblock %}
-	            </div>
-	        </div>
-	    </div>
+<div class="content container">
+<div class="row">
+<div class="col-md-12">
+{% block content %}
+{% endblock %}
+</div>
+</div>
+</div>
 
-	    <div class="page-footer">
-		    <div class="container">
-		    	<p class="nav-text">&copy; Copyright Nick's Django Playground 2015-2016</p>
-	    	</div>
-	    </div>
+<div class="page-footer">
+<div class="container">
+<p class="nav-text">&copy; Copyright Nick's Django Playground 2015-2016</p>
+</div>
+</div>
 
-    </body>
+</body>
 </html>

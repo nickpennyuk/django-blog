@@ -8,6 +8,7 @@ Post is the name of our model.
 models.Model means that the Post is a Django Model, so Django knows that
 it should be saved in the database.
 """
+
 class Post(models.Model):
     #link to another table eg. users.
     author = models.ForeignKey('auth.User')
