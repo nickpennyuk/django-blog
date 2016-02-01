@@ -94,6 +94,18 @@ class AlbumCreateView(CreateView):
     model = Album
     form_class = AlbumForm
 
+    def _artist(self):
+        pk = self.kwargs.get('pk', None)
+        artist = get_object_or_404(Artist, pk=pk)
+        return artist
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'artist': self._artist(),
+        })
+        return context
+
     def form_valid(self, form):
         album = form.save(commit=False)
         artist.name = request.artists
