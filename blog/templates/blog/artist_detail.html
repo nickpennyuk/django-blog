@@ -2,7 +2,7 @@
 
 {% block content %}
 	{% if user.is_authenticated %}
-		<a class="btn btn-default pull-right" href="{% url 'album_new' %}">New Album</a>
+		<a class="btn btn-default pull-right" href="{% url 'album_new' artist.pk %}">New Album</a>
 	{% endif %}
 	<h1>{{ artist.name }}'s Albums</h1>
 	{% for album in artist.album_set.all %}

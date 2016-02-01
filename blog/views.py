@@ -44,8 +44,19 @@ class PostUpdateView(UpdateView):
 
 
 """
-class PostDeleteView(DeleteView):
-
+def post_edit(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'blog/post_form.html', {'form': form})
 """
 
 
@@ -83,20 +94,17 @@ class AlbumCreateView(CreateView):
     model = Album
     form_class = AlbumForm
 
-""" This Code?
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.author = self.request.user
-        self.object.published_date = timezone.now()
-        return super().form_valid(form)
-
+    if form.is_valid():
+            album = form.save(commit=False)
+            artist.name = request.artists
+            artist.save()
+            return redirect('artist_detail', pk=artist.pk)
+ 
     def get_success_url(self):
         return reverse('album_list', args=[self.object.artist.pk])
 
-"""
 
 class AlbumUpdateView(UpdateView):
-
 
     model = Album
     form_class = AlbumForm
@@ -106,20 +114,6 @@ class AlbumUpdateView(UpdateView):
 
 
 """
-def post_edit(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            return redirect('post_detail', pk=post.pk)
-    else:
-        form = PostForm(instance=post)
-    return render(request, 'blog/post_form.html', {'form': form})
-
 
 def album_edit(request, pk):
     album = get_object_or_404(Album, pk=pk)
