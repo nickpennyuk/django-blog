@@ -83,9 +83,17 @@ class AlbumCreateView(CreateView):
     model = Album
     form_class = AlbumForm
 
+""" This Code?
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.author = self.request.user
+        self.object.published_date = timezone.now()
+        return super().form_valid(form)
+
     def get_success_url(self):
         return reverse('album_list', args=[self.object.artist.pk])
 
+"""
 
 class AlbumUpdateView(UpdateView):
 
