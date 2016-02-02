@@ -108,7 +108,7 @@ class AlbumCreateView(CreateView):
 
     def form_valid(self, form):
         album = form.save(commit=False)
-        artist.name = request.artists
+        artist.name = request.artist
         artist.save()
         return redirect('artist_detail', pk=artist.pk)
 
