@@ -108,7 +108,7 @@ class AlbumCreateView(CreateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        #self.object.artist = self.request.artist
+        self.object.artist = self._artist()
         return super().form_valid(form)
         
 
