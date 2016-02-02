@@ -43,7 +43,13 @@ class PostUpdateView(UpdateView):
         return reverse('post_detail', args=[self.object.pk])
 
 
-"""
+        
+def post_remove(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.delete()
+    return redirect('post_list')
+
+    """
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -89,6 +95,12 @@ class ArtistUpdateView(UpdateView):
         return reverse('artist_list')
 
 
+def artist_remove(request, pk):
+    artist = get_object_or_404(Artist, pk=pk)
+    artist.delete()
+    return redirect('artist_list')
+
+    
 class AlbumCreateView(CreateView):
 
     model = Album
@@ -111,11 +123,10 @@ class AlbumCreateView(CreateView):
         self.object.artist = self._artist()
         return super().form_valid(form)
         
-
     def get_success_url(self):
         return reverse('album_list', args=[self.object.artist.pk])
 
-
+        
 class AlbumUpdateView(UpdateView):
 
     model = Album

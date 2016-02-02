@@ -10,7 +10,8 @@
         <h3>{{ post.title }}</h3>
         <p>{{ post.text|linebreaks }}</p>
         {% if user.is_authenticated %}
-        	<a class="btn btn-default pull-right" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a class="btn btn-default pull-right" href="{% url 'post_remove' pk=post.pk %}">Delete Post</a>
+        	<a class="btn btn-default pull-right" href="{% url 'post_edit' pk=post.pk %}">Edit Post</span></a>
         {% endif %}
     </div>
 {% endblock %}
