@@ -107,10 +107,10 @@ class AlbumCreateView(CreateView):
         return context
 
     def form_valid(self, form):
-        album = form.save(commit=False)
-        artist.name = request.artist
-        artist.save()
-        return redirect('artist_detail', pk=artist.pk)
+        self.object = form.save(commit=False)
+        #self.object.artist = self.request.artist
+        return super().form_valid(form)
+        
 
     def get_success_url(self):
         return reverse('album_list', args=[self.object.artist.pk])
@@ -126,7 +126,6 @@ class AlbumUpdateView(UpdateView):
 
 
 """
-
 def album_edit(request, pk):
     album = get_object_or_404(Album, pk=pk)
     if request.method == "POST":
