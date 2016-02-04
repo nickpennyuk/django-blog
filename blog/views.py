@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
-class PostListView(ListView): 
+class PostListView(ListView):
     # Automatically gets template file from .lower + .append _html
     def get_queryset(self):
         return Post.objects.filter(
@@ -43,12 +43,21 @@ class PostUpdateView(UpdateView):
         return reverse('post_detail', args=[self.object.pk])
 
 
-        
+class PostDeleteView(DeleteView):
+
+    model = Post
+    form_class = PostForm
+
+    def get_success_url(self):
+        return reverse('post_list', args=[self.object.pk])
+
+
+"""
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete()
     return redirect('post_list')
-
+"""
     """
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -100,7 +109,7 @@ def artist_remove(request, pk):
     artist.delete()
     return redirect('artist_list')
 
-    
+
 class AlbumCreateView(CreateView):
 
     model = Album
@@ -122,11 +131,11 @@ class AlbumCreateView(CreateView):
         self.object = form.save(commit=False)
         self.object.artist = self._artist()
         return super().form_valid(form)
-        
+
     def get_success_url(self):
         return reverse('album_list', args=[self.object.artist.pk])
 
-        
+
 class AlbumUpdateView(UpdateView):
 
     model = Album
@@ -134,6 +143,12 @@ class AlbumUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('album_list', args=[self.object.artist.pk])
+
+
+def album_remove(request, pk):
+    album = get_object_or_404(Post, pk=pk)
+    album.delete()
+    return redirect('artist_detail')
 
 
 """
